@@ -1,0 +1,35 @@
+<div class="container mt-4">
+    <div class="row justify-content-start">
+        <div class="col-sm-3">
+            <h4>Listado de Clientes</h4>
+        </div>
+        <div class="col-sm-4">
+            <form action="">
+                <div class="form-group">
+                    <input type="text" class="form-control"  placeholder="Buscar Cliente">
+                </div>
+            </form>
+        </div>
+        
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-3" *ngFor = "let cliente of clientes">
+            <div class="card">
+                <div class="d-flex justify-content-center">
+                    <img src="{{cliente.imagen}}" class="card-img-top imgCartaCliente">
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{cliente.nombre}} {{cliente.apellido}}</h5>
+                  <p class="card-text"><span class="font-weight-bold">DNI: </span>{{cliente.dni}}</p>
+                  <p class="card-text"><span class="font-weight-bold">E-mail: </span>{{cliente.email}}</p>
+                  <p class="card-text"><span class="font-weight-bold">Teléfono: </span>{{cliente.telefono}}</p>
+                  <!--<p class="card-text"><span class="font-weight-bold">Fecha de Nacimiento: </span>{{cliente.fechaNacimiento.toDate() | date: 'dd/MM/yyyy'}}</p>-->
+                  <a href="#" class="card-link">Editar</a>
+                  <a href="#" class="card-link text-danger">Deshabilitar Usuario</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

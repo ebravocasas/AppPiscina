@@ -1,0 +1,80 @@
+<div class="container mt-4">
+    <form [formGroup] = "formularioCliente" action="">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputNombre">Nombre</label>
+                    <input type="text" class="form-control" formControlName="nombre" id="inputNombre" placeholder="Nombre del cliente">
+                    <div *ngIf = "formularioCliente.controls['nombre'].invalid && formularioCliente.controls['nombre'].dirty" class="alert alert-danger" role="alert">
+                        <span *ngIf = "formularioCliente.controls['nombre'].errors.required">El nombre es un campo requerido</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputApellido">Apellidos</label>
+                    <input type="text" class="form-control" formControlName="apellido" id="inputApellido" placeholder="Apellidos del cliente">
+                    <div *ngIf = "formularioCliente.controls['apellido'].invalid && formularioCliente.controls['apellido'].dirty" class="alert alert-danger" role="alert">
+                        <span *ngIf = "formularioCliente.controls['apellido'].errors.required">Los apellidos es un campo requerido</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--ROW 2-->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputEmail">E-mail</label>
+                    <input type="text" class="form-control" formControlName="email" id="inputEmail" placeholder="E-mail del cliente">
+                    <div *ngIf = "formularioCliente.controls['email'].invalid && formularioCliente.controls['email'].dirty" class="alert alert-danger" role="alert">
+                        <span *ngIf = "formularioCliente.controls['email'].errors.required">El email electrónico es un campo requerido</span>
+                        <span *ngIf = "formularioCliente.controls['email'].errors.email">El email electrónico introducido no es válido</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputDni">DNI</label>
+                    <input type="text" class="form-control" formControlName="dni" id="inputDni" placeholder="DNI del cliente">
+                    <div *ngIf = "formularioCliente.controls['dni'].invalid && formularioCliente.controls['dni'].dirty" class="alert alert-danger" role="alert">
+                        <span *ngIf = "formularioCliente.controls['dni'].errors.required">El DNI es un campo requerido</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--ROW 3-->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputFecha">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" formControlName="fechaNacimiento" id="inputFecha">
+                    <div *ngIf = "formularioCliente.controls['fechaNacimiento'].invalid && formularioCliente.controls['fechaNacimiento'].dirty" class="alert alert-danger" role="alert">
+                        <span *ngIf = "formularioCliente.controls['fechaNacimiento'].errors.required">La fecha de nacimiento es un campo requerido</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputTelefono">Teléfono</label>
+                    <input type="number" class="form-control" formControlName="telefono" id="inputTelefono" placeholder="Teléfono del cliente">
+                </div>
+            </div>
+        </div>
+        <!--ROW 4-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="inputImagen">Imagen</label>
+                    <input type="file" (change)="subirArchivo($event)" class="form-control-file" formControlName="imagen" id="inputImagen">
+                    <div *ngIf = "formularioCliente.controls['imagen'].invalid && formularioCliente.controls['imagen'].dirty" class="alert alert-danger" role="alert">
+                        <span *ngIf = "formularioCliente.controls['imagen'].errors.required">La imagen es un campo requerido</span>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <progressbar [value]="porcentajeSubida" type="info" [striped]="true" [animate]="true">{{porcentajeSubida}}%</progressbar>
+                </div>
+                <button class="btn btn-primary mt-3" [disabled] = "formularioCliente.invalid" (click)="crear()">Crear Cliente</button>
+            </div>
+        </div>
+    </form>
+</div>

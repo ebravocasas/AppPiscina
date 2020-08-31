@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "apppiscina-b5955": {
+      "hosting": {
+        "AppPiscina": [
+          "apppiscina-b5955"
+        ]
+      }
+    }
+  }
+}
