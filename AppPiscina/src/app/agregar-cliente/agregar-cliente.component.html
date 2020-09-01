@@ -73,7 +73,8 @@
                 <div class="col-sm-12">
                     <progressbar [value]="porcentajeSubida" type="info" [striped]="true" [animate]="true">{{porcentajeSubida}}%</progressbar>
                 </div>
-                <button class="btn btn-primary mt-3" [disabled] = "formularioCliente.invalid" (click)="crear()">Crear Cliente</button>
+                <button *ngIf="!editable" class="btn btn-primary mt-3" [disabled] = "formularioCliente.invalid" (click)="crear()">Crear Cliente</button>
+                <button *ngIf="editable" class="btn btn-primary mt-3" [disabled] = "formularioCliente.invalid" (click)="editar()">Editar Cliente</button>
             </div>
         </div>
     </form>

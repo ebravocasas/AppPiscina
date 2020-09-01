@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-cliente',
@@ -12,7 +13,14 @@ export class AgregarClienteComponent implements OnInit {
   formularioCliente: FormGroup;
   porcentajeSubida: number = 0;
   imagenUrl: string = '';
-  constructor(private fb: FormBuilder, private storage: AngularFireStorage, private db:  AngularFirestore) { }
+  editable: boolean = false;
+  id: string;
+  constructor(
+    private fb: FormBuilder, 
+    private storage: AngularFireStorage, 
+    private db:  AngularFirestore, 
+    private activeRoute: ActivatedRoute
+    ) { }
 
   ngOnInit(){
     this.formularioCliente = this.fb.group({
@@ -26,14 +34,40 @@ export class AgregarClienteComponent implements OnInit {
       telefono: [''],
       imagen:['', Validators.required]
     })
+
+    this.id = this.activeRoute.snapshot.params.clienteID;
+    if(this.id != undefined){
+      this.editable = true;
+      this.db.doc<any>('clientes' + '/' +this.id).valueChanges().subscribe((cliente) =>{
+        console.log(cliente)
+        this.formularioCliente.setValue({
+          nombre: cliente.nombre,
+          apellido: cliente.apellido,
+          email: cliente.email,
+          dni: cliente.dni,
+          fechaNacimiento: new Date(cliente.fechaNacimiento.seconds * 1000).toISOString().substr(0,10),
+          telefono: cliente.telefono,
+          imagen: ''
+        })
+        this.imagenUrl = cliente.imagen;
+      })
+    }
   }
 
   crear(){
-    this.formularioCliente.value.imagen = this.imagenUrl
-    this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento)
+    this.formularioCliente.value.imagen = this.imagenUrl;
+    this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento);
     console.log(this.formularioCliente.value);
     this.db.collection('clientes').add(this.formularioCliente.value).then((finalizado) => {
       console.log('Registro creado en la BBDD')
+    })
+  }
+
+  editar(){
+    this.formularioCliente.value.imagen = this.imagenUrl;
+    this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento);
+    this.db.doc('clientes/' + this.id).update(this.formularioCliente.value).then((resultado) =>{
+      console.log('Se editó correctamente')
     })
   }
 
