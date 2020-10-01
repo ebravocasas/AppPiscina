@@ -24,6 +24,7 @@ import { EncabezadoComponent } from './encabezado/encabezado.component';
 import { ListadoClientesComponent } from './listado-clientes/listado-clientes.component';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AgregarClienteComponent } from './agregar-cliente/agregar-cliente.component';
+import { TarifasComponent } from './tarifas/tarifas.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AgregarClienteComponent } from './agregar-cliente/agregar-cliente.compo
     LoginComponent,
     EncabezadoComponent,
     ListadoClientesComponent,
-    AgregarClienteComponent
+    AgregarClienteComponent,
+    TarifasComponent
   ],
   imports: [
     BrowserModule,

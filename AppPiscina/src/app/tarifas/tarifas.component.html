@@ -1,0 +1,41 @@
+<div class="container mt-4ºº">
+  <div class="row mt-2">
+    <div class="col-sm-8">
+      <h4>Precios</h4>
+      <ul>
+        <li>Suscripción Semanal</li>
+        <li>Suscripción Mensual</li>
+      </ul>
+    </div>
+
+    <div class="col-sm-4">
+      <h4>Nuevo/Editar</h4>
+      <form class="mt-2" [formGroup]="formularioTarifa">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input class="form-control" type="text" id="nombre" formControlName="nombre" />
+        </div>
+        <div class="form-group">
+          <label for="coste">Coste</label>
+          <input class="form-control" type="number" id="coste" formControlName="coste" />
+        </div>
+        <div class="form-group">
+          <label for="duracion">Duración</label>
+          <input class="form-control" type="number" id="duracion" formControlName="duracion" />
+        </div>
+        <div class="form-group">
+          <label for="tipoDuracion">Tipo de Duración</label>
+          <select class="form-control" name="tipoDuracion" id="tipoDuracion" formControlName="tipoDuracion">
+            <option value="dia">Día</option>
+            <option value="semana">Semana</option>
+            <option value="quincena">Quincena</option>
+            <option value="mes">Mes</option>
+            <option value="ano">Año</option>
+          </select>
+        </div>
+        <button [disabled]="formularioTarifa.invalid" class="btn btn-primary mr-3" (click)="agregar()">Agregar</button>
+        <button [disabled]="formularioTarifa.invalid" class="btn btn-info">Editar</button>
+      </form>
+    </div>
+  </div>
+</div>
