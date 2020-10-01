@@ -3,8 +3,7 @@
     <div class="col-sm-8">
       <h4>Precios</h4>
       <ul>
-        <li>Suscripción Semanal</li>
-        <li>Suscripción Mensual</li>
+        <li *ngFor="let tarifa of tarifas" (click)="mostrarTarifa(tarifa)">{{ tarifa.nombre }}</li>
       </ul>
     </div>
 
@@ -33,8 +32,12 @@
             <option value="ano">Año</option>
           </select>
         </div>
-        <button [disabled]="formularioTarifa.invalid" class="btn btn-primary mr-3" (click)="agregar()">Agregar</button>
-        <button [disabled]="formularioTarifa.invalid" class="btn btn-info">Editar</button>
+        <button *ngIf="!esEditar" [disabled]="formularioTarifa.invalid" class="btn btn-primary" (click)="agregar()">
+          Agregar
+        </button>
+        <button *ngIf="esEditar" [disabled]="formularioTarifa.invalid" class="btn btn-primary" (click)="editar()">
+          Editar
+        </button>
       </form>
     </div>
   </div>
