@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { Error404Component } from './error404/error404.component';
+import { MensajesService } from './services/mensajes.service'
 
 /*Import de Bootstrap*/ 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -50,7 +51,8 @@ import { AgregarClienteComponent } from './agregar-cliente/agregar-cliente.compo
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     AngularFireAuth,
-    AngularFirestore
+    AngularFirestore,
+    MensajesService
   ],
   bootstrap: [AppComponent]
 })

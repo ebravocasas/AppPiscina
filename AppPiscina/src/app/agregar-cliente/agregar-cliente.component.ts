@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2'
+import { MensajesService } from '../services/mensajes.service';
 
 @Component({
   selector: 'app-agregar-cliente',
@@ -19,7 +21,8 @@ export class AgregarClienteComponent implements OnInit {
     private fb: FormBuilder, 
     private storage: AngularFireStorage, 
     private db:  AngularFirestore, 
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private mensaje: MensajesService
     ) { }
 
   ngOnInit(){
@@ -32,7 +35,7 @@ export class AgregarClienteComponent implements OnInit {
       dni: ['', Validators.required],
       fechaNacimiento: ['', Validators.required],
       telefono: [''],
-      imagen:['', Validators.required]
+      imagen:['']
     })
 
     this.id = this.activeRoute.snapshot.params.clienteID;
@@ -59,7 +62,9 @@ export class AgregarClienteComponent implements OnInit {
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento);
     console.log(this.formularioCliente.value);
     this.db.collection('clientes').add(this.formularioCliente.value).then((finalizado) => {
-      console.log('Registro creado en la BBDD')
+      this.mensaje.mensajeSuccess('Cliente Creado', 'Se ha guardado el cliente en la base de datos correctamente')
+    }).catch(()=>{
+      this.mensaje.mensajeError('Error','Ha ocurrido un error al crear el cliente');
     })
   }
 
@@ -67,7 +72,9 @@ export class AgregarClienteComponent implements OnInit {
     this.formularioCliente.value.imagen = this.imagenUrl;
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento);
     this.db.doc('clientes/' + this.id).update(this.formularioCliente.value).then((resultado) =>{
-      console.log('Se editó correctamente')
+      this.mensaje.mensajeSuccess('Cliente Editado', 'Se ha editado el cliente correctamente')
+    }).catch(()=>{
+      this.mensaje.mensajeError('Error','Ha ocurrido un error al editar el cliente');
     })
   }
 
