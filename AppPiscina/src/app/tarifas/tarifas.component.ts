@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Tarifa } from '../models/tarifa';
+import { MensajesService } from '../services/mensajes.service';
 
 @Component({
   selector: 'app-tarifas',
@@ -13,7 +14,7 @@ export class TarifasComponent implements OnInit {
   tarifas: Tarifa[] = new Array<Tarifa>();
   esEditar: boolean = false;
   id: string;
-  constructor(private fb: FormBuilder, private db: AngularFirestore /*, private msj: MensajesService*/) {}
+  constructor(private fb: FormBuilder, private db: AngularFirestore, private mensaje: MensajesService) {}
 
   ngOnInit(): void {
     this.formularioTarifa = this.fb.group({
@@ -46,12 +47,12 @@ export class TarifasComponent implements OnInit {
       .collection<Tarifa>('tarifas')
       .add(this.formularioTarifa.value)
       .then(() => {
-        //this.msj.mensajeCorrecto('Agregado','Se agregó correctamente')
+        this.mensaje.mensajeSuccess('Agregado', 'Se agregó correctamente');
         this.formularioTarifa.reset();
         this.recogerDatos();
       })
       .catch(() => {
-        //this.msj.mensajeError('Error','Error al agregar')
+        this.mensaje.mensajeError('Error', 'Error al agregar');
       });
     console.log(this.formularioTarifa.value);
   }
@@ -72,14 +73,13 @@ export class TarifasComponent implements OnInit {
       .doc('tarifas/' + this.id)
       .update(this.formularioTarifa.value)
       .then(() => {
-        //this.msj.mensajeCorrecto('Editado','Se editado correctamente')
+        this.mensaje.mensajeSuccess('Editado', 'Se editado correctamente');
         this.formularioTarifa.reset();
         this.esEditar = false;
         this.recogerDatos();
       })
       .catch(() => {
-        //this.msj.mensajeError('Error','Error al editar')
+        this.mensaje.mensajeError('Error', 'Error al editar');
       });
   }
-  //6:51 - Mergear servicio de mensajes
 }
