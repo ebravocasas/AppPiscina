@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
         .then((usuario) => {
           console.log(usuario);
           this.spinner.hide();
-          this.router.navigate(['/listado-clientes']);
         })
         .catch((error) => {
           this.datosCorrectos = false;

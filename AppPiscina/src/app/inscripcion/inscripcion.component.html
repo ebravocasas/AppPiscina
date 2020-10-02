@@ -1,8 +1,55 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-sm-6">
-      <app-seleccion-cliente></app-seleccion-cliente>
+      <app-seleccion-cliente
+        [nombre]="clienteSeleccionado.nombre"
+        (clienteSeleccionado)="asignarCliente($event)"
+        (clienteCancelado)="cancelarClienteOutput()"
+      ></app-seleccion-cliente>
+      <div class="form-group">
+        <label for="tarifa">Tarifa</label>
+        <select
+          [(ngModel)]="idTarifa"
+          (change)="seleccionarTarifa($event.target.value)"
+          class="form-control"
+          id="tarifa"
+        >
+          <option [value]="null" disabled selected>Seleccione una tarifa</option>
+          <option *ngFor="let tarifa of tarifas" [value]="tarifa.id">{{ tarifa.nombre }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="fechaInicio">Fecha de Inicio</label>
+        <input class="form-control" type="text" [value]="inscripcion.fecha | date" id="fechaInicio" disabled />
+      </div>
+      <div class="form-group">
+        <label for="fechaFinalizacion">Fecha de Finalización</label>
+        <input
+          class="form-control"
+          type="text"
+          [value]="inscripcion.fechaFinalizacion | date"
+          id="fechaFinalizacion"
+          disabled
+        />
+      </div>
+      <div class="form-group">
+        <label for="subtotal">Subtotal</label>
+        <input class="form-control" type="number" [value]="inscripcion.subTotal" id="subtotal" disabled />
+      </div>
+      <div class="form-group">
+        <label for="iva">IVA</label>
+        <input class="form-control" type="number" [value]="inscripcion.iva" id="iva" disabled />
+      </div>
+      <div class="form-group">
+        <label for="total">Total</label>
+        <input class="form-control" type="number" [value]="inscripcion.total" id="total" disabled />
+      </div>
+      <button class="btn btn-primary mt-2" (click)="guardar()">Guardar</button>
     </div>
-    <div class="col-sm-6"></div>
+    <div class="col-sm-6">
+      <div *ngIf="clienteSeleccionado.imagen" class="d-flex justify-content-center align-items-center">
+        <img [src]="clienteSeleccionado.imagen" class="imagenInscripcion" />
+      </div>
+    </div>
   </div>
 </div>

@@ -28,6 +28,7 @@ import { AgregarClienteComponent } from './agregar-cliente/agregar-cliente.compo
 import { TarifasComponent } from './tarifas/tarifas.component';
 import { InscripcionComponent } from './inscripcion/inscripcion.component';
 import { SeleccionClienteComponent } from './seleccion-cliente/seleccion-cliente.component';
+import { ListadoInscripcionesComponent } from './listado-inscripciones/listado-inscripciones.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SeleccionClienteComponent } from './seleccion-cliente/seleccion-cliente
     AgregarClienteComponent,
     TarifasComponent,
     InscripcionComponent,
-    SeleccionClienteComponent
+    SeleccionClienteComponent,
+    ListadoInscripcionesComponent
   ],
   imports: [
     BrowserModule,
