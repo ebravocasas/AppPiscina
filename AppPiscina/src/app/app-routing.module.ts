@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'tarifas', component: TarifasComponent },
   { path: 'inscripcion', component: InscripcionComponent },
   { path: 'listado-inscripciones', component: ListadoInscripcionesComponent },
-  /*{ path: '**', component: Error404Component }*/
+  { path: '**', component: Error404Component },
 ];
 
 @NgModule({
