@@ -48,6 +48,8 @@ export class ListadoClientesComponent implements OnInit {
       .catch((error) => {
         this.Mensaje.mensajeError('Error', 'Ha ocurrido un error al borrar el usuario');
       });
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 1500);
   }
 }
